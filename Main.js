@@ -36,7 +36,7 @@ img.onload = function () {
     noise.seed(getRandomInt(65536)+1);
     for (let i = 0; i < grid_y; i++) {
 
-        if (i % 2 != 0) {
+        if (i % 2 !== 0) {
             current_x += 1.5 * size;
         }
 
