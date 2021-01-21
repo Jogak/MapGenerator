@@ -199,7 +199,7 @@ function getPossiblePointRiver(a, origin_x, origin_y){
 function drawRiver(points, ctx){
   var f = new Layout(Layout.flat, new Point(15.0, 15.0), new Point(15, 0));
   ctx.lineWidth = '3' ;
-  //ctx.strokeStyle ="#18AEE4";
+  ctx.strokeStyle ="#18AEE4";
 
   ctx.moveTo(f.hexToPixel(new Hex(points[0].x,points[0].y, 0- points[0].x - points[0].y)).x+16, f.hexToPixel(new Hex(points[0].x,points[0].y, (0 -points[0].x - points[0].y))).y+28);
   for(var i = 1; i < points.length; i++){
