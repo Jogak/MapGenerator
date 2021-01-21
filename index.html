@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Projet Web</title>
-
-  </head>
-  <body>
-    <h1>Map</h1>
-    <canvas id="canvas" width="300" height="300"></canvas>
-
-    <script type="text/javascript" src="site.js"></script>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+   <canvas id="canvas"></canvas>
+   <script src="entities/Tile.js"></script>
+   <script src="providers/TileProvider.js"></script>
+   <script src="Parameters.js"></script>
+   <script type="module" src="providers/GlacialTilesProvider.js"></script>
+   <script type="module" src="providers/TemperateTilesProvider.js"></script>
+   <script type="module" src="services/TilesService.js"></script>
+   <script type="module" src="utils/Utils.js"></script>
+   <script src="Perlin.js"></script>
+   <script type="module" src="utils/lib-module.js"></script>
+   <script type="module" src="Main.js"></script>
+</body>
 </html>

@@ -1,0 +1,52 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class main {
+
+}
+
+class TilesService {
+    - providers : Map<Integer, TilesProvider>
+    + getTile(temperature, noise) : Tile
+}
+
+package Providers {
+
+interface TilesProvider {
+    +getTile(noise) : Tile
+}
+
+class GlacialTilesProvider {
+    +getTile(noise) : Tile
+}
+
+class DesertTilesProvider {
+    +getTile(noise) : Tile
+}
+
+class TemperateTilesProvider {
+    +getTile(noise) : Tile
+}
+
+}
+
+class Tile {
+    - key : String
+    - position : array
+    + getKey()
+    + getPosition()
+}
+
+main .right.> TilesService
+main ..> Tile
+main ..> Utils
+main ..> Perlin
+
+TilesService ..> Providers
+
+GlacialTilesProvider .up.|> TilesProvider
+DesertTilesProvider .up.|> TilesProvider
+TemperateTilesProvider .up.|> TilesProvider
+
+
+@enduml
