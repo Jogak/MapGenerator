@@ -172,6 +172,8 @@ export function path(a, start_x, start_y, end_x, end_y, size_x, size_y, ctx) {
     path[counter][2] = start_y;
 
     var f = new Layout(Layout.flat, new Point(15.0, 15.0), new Point(15, 0));
+    ctx.beginPath();
+    ctx.lineWidth = '1';
     ctx.strokeStyle = "black";
     while(counter!=0) {
         if (path[counter-1][1] != "" && path[counter-1][2] != "") {
@@ -198,16 +200,14 @@ function getPossiblePointRiver(a, origin_x, origin_y){
 }
 function drawRiver(points, ctx){
   var f = new Layout(Layout.flat, new Point(15.0, 15.0), new Point(15, 0));
+  ctx.beginPath();
   ctx.lineWidth = '3' ;
-  //ctx.strokeStyle ="#18AEE4";
-
+  ctx.strokeStyle ="#18AEE4";
   ctx.moveTo(f.hexToPixel(new Hex(points[0].x,points[0].y, 0- points[0].x - points[0].y)).x+16, f.hexToPixel(new Hex(points[0].x,points[0].y, (0 -points[0].x - points[0].y))).y+28);
   for(var i = 1; i < points.length; i++){
     ctx.lineTo(f.hexToPixel(new Hex(points[i].x,points[i].y, 0- points[i].x - points[i].y)).x+16, f.hexToPixel(new Hex(points[i].x,points[i].y, (0 -points[i].x - points[i].y))).y+28);
     ctx.stroke();
   }
-  ctx.lineWidth = '1';
-  ctx.strokeStyle = "black";
 }
 
 export function createRiver(a,ctx){
