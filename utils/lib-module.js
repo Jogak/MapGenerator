@@ -330,3 +330,56 @@ class Tests {
 // Tests
 function complain(name) { console.log("FAIL", name); }
 Tests.testAll();
+
+function getPossiblePointRiver(a, origin_x, origin_y){
+  var points = [];
+  var cpt =0;
+  if(hexIsAccessible(a,origin_x-1,origin_y)){ points[cpt]=(new Point(origin_x-1,origin_y)); cpt+=1;}
+  if(hexIsAccessible(a,origin_x+1,origin_y)){ points[cpt]=(new Point(origin_x+1,origin_y)); cpt+=1;}
+  if(hexIsAccessible(a,origin_x,origin_y-1)){ points[cpt]=(new Point(origin_x,origin_y-1)); cpt+=1;}
+  if(hexIsAccessible(a,origin_x,origin_y+1)){ points[cpt]=(new Point(origin_x,origin_y+1)); cpt+=1;}
+
+  return points;
+}
+function drawRiver(points, ctx){
+  var f = new Layout(Layout.flat, new Point(15.0, 15.0), new Point(15, 0));
+  ctx.lineWidth = '3' ;
+  ctx.strokeStyle ="#18AEE4";
+
+  ctx.moveTo(f.hexToPixel(new Hex(points[0].x,points[0].y, 0- points[0].x - points[0].y)).x+16, f.hexToPixel(new Hex(points[0].x,points[0].y, (0 -points[0].x - points[0].y))).y+28);
+  for(var i = 1; i < points.length; i++){
+    ctx.lineTo(f.hexToPixel(new Hex(points[i].x,points[i].y, 0- points[i].x - points[i].y)).x+16, f.hexToPixel(new Hex(points[i].x,points[i].y, (0 -points[i].x - points[i].y))).y+28);
+    ctx.stroke();
+  }
+  ctx.lineWidth = '1';
+  ctx.strokeStyle = "black";
+}
+
+function createRiver(a,ctx){
+  var start_x, start_y;
+  start_x = getRandomInt(14);
+  start_y = getRandomInt(10);
+  while(!a[start_x][start_y].includes("water")){
+    start_x = getRandomInt(14);
+    start_y = getRandomInt(14);
+  }
+  var riverPoint =[];
+  riverPoint[0] = new Point(start_x,start_y);
+  var possible_points =getPossiblePointRiver(a,start_x,start_y);
+  var nextPoint;
+  var cptPath = 0;
+  var currentPoint = riverPoint[0];
+  while( cptPath <5){
+  if(possible_points.length !=0){
+    nextPoint = possible_points[getRandomInt(possible_points.length-1)];
+    riverPoint[cptPath+1] = nextPoint;
+    possible_points = getPossiblePointRiver(a,nextPoint.x,nextPoint.y);
+    cptPath +=1;
+    } else {
+      break;
+    }
+}
+  if(riverPoint.length >=2){
+    drawRiver(riverPoint,ctx);
+  }
+}
