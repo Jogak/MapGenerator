@@ -84,4 +84,8 @@ export class TropicalTilesProvider {
 
         return new Tile(key,pos);
     }
+
+    getCities(){
+        return new Cities(["Sao Paulo", "Buenos Aires", "Cordoba", "La Paz", "Lima"],[7,7])
+    }
 }

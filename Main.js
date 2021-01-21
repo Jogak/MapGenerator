@@ -1,6 +1,6 @@
 import {createMatrix, getRandomInt, indicesItemInArray, path,createRiver} from "./utils/Utils.js";
 import {Layout, Point, Hex} from "./utils/lib-module.js";
-import {getTile} from "./services/TilesService.js";
+import {getCities, getTile} from "./services/TilesService.js";
 
 const tilesDrawn = new Map();
 let img = document.createElement('IMG');
@@ -78,24 +78,10 @@ img.onload = function () {
 
     
     /* BEGIN draw cities and write unique names */
-    let cities;
-    let city_coord;
-    if (TEMPERATURE == -1) {
-        cities = ["Stockholm", "Oslo", "Malmö", "Copenhague", "Helsinki"];
-        city_coord = [4, 7];
-    } else if (TEMPERATURE == 0) {
-        cities = ["Paris", "Berlin", "Amsterdam", "Zurich", "Vienne"];
-        city_coord = [1, 7];
-    } else if (TEMPERATURE == 1) {
-        cities = ["Sao Paulo", "Buenos Aires", "Cordoba", "La Paz", "Lima"];
-        city_coord = [7, 7];
-    } else if (TEMPERATURE == 2) {
-        cities = ["Bamako", "Dakar", "Kinshasa", "Nairobi", "Abidjan"];
-        city_coord = [6, 7];
-    } else if (TEMPERATURE == 3) {
-        cities = ["Rabat", "Le Caire", "Tunis", "Alger", "Tripoli"];
-        city_coord = [8, 7];
-    }
+    let c = getCities(temperature_level);
+    let cities = c.names;
+    let city_coord = c.position;
+
     let picked_cities = [];
     let picked_city;
     let difference;

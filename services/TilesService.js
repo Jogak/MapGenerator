@@ -15,3 +15,7 @@ providers.set(3, new DesertTilesProvider());
 export function getTile(temperature, noise){
     return providers.get(temperature).getTile(noise);
 }
+
+export function getCities(temperature){
+    return providers.get(temperature).getCities();
+}

@@ -130,4 +130,8 @@ export class TemperateTilesProvider {
 
            return new Tile(key,pos);
     }
+
+    getCities() {
+        return new Cities( ["Paris", "Berlin", "Amsterdam", "Zurich", "Vienne"], [1,7]);
+    }
 }

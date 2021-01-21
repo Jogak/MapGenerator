@@ -94,4 +94,8 @@ export class SavannahTilesProvider {
 
     return new Tile(key,pos);
   }
+
+  getCities(){
+    return new Cities(["Bamako", "Dakar", "Kinshasa", "Nairobi", "Abidjan"], [6,7])
+  }
 }

@@ -99,4 +99,8 @@ export class GlacialTilesProvider {
 
       return new Tile(key, tilePos);
    }
+
+   getCities() {
+       return new Cities(["Stockholm", "Oslo", "Malmö", "Copenhague", "Helsinki"], [4,7]);
+   }
 }
