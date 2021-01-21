@@ -40,7 +40,7 @@ export function hexDistance(x1 ,y1 ,x2 ,y2) {
     let dy = Math.abs(y2-y1);
     return Math.sqrt((dx*dx) + (dy*dy));
 }
-export function path(a, start_x, start_y, end_x, end_y, size_x, size_y) {
+export function path(a, start_x, start_y, end_x, end_y, size_x, size_y, ctx) {
     var error=0;
     if (start_x == end_x && start_y == end_y) error=1;
     if (!hexIsAccessible(a,start_x,start_y)) error=1;

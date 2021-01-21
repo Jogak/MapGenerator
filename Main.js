@@ -69,9 +69,10 @@ img.onload = function () {
         cities_to_draw_indices.push(index);
     }
     /* END get indices of possible cities to draw */
+    ctx
 
     // process and draw path between positions
-    path(map_matrix, cities_to_draw_indices[0][0], cities_to_draw_indices[0][1], cities_to_draw_indices[1][0], cities_to_draw_indices[1][1], 20, 20);
+    path(map_matrix, cities_to_draw_indices[0][0], cities_to_draw_indices[0][1], cities_to_draw_indices[1][0], cities_to_draw_indices[1][1], 20, 20,ctx);
 
     /* BEGIN draw cities and write unique names */
     let north_cities = ["Stockholm", "Oslo", "Malmö", "Copenhague", "Helsinki"];
