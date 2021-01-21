@@ -1,4 +1,6 @@
-class GlacialTilesProvider {
+import {getRandomInt} from "../utils/Utils.js";
+
+export class GlacialTilesProvider {
 
   #tilesMap = providesTilesMap();
 

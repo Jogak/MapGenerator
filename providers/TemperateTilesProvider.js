@@ -1,4 +1,6 @@
-class TemperateTilesProvider {
+import {getRandomInt} from "../utils/Utils.js";
+
+export class TemperateTilesProvider {
 
     #tilesMap = providesTilesMap();
 
