@@ -2,43 +2,72 @@
 skinparam classAttributeIconSize 0
 
 class main {
-
+    - canvas : Canvas
+    + generateTileMap()
+    + createCities()
+    + createRivers()
 }
 
 class TilesService {
     - providers : Map<Integer, TilesProvider>
     + getTile(temperature, noise) : Tile
+    + getCities() : Cities
 }
 
 package Providers {
 
 interface TilesProvider {
     +getTile(noise) : Tile
+    +getCities() : Cities
 }
 
 class GlacialTilesProvider {
     +getTile(noise) : Tile
+    +getCities() : Cities
 }
 
 class DesertTilesProvider {
     +getTile(noise) : Tile
+    +getCities() : Cities
 }
 
 class TemperateTilesProvider {
     +getTile(noise) : Tile
+    +getCities() : Cities
+}
+
+class SavannahTilesProvider {
+    +getTile(noise) : Tile
+    +getCities() : Cities
+}
+
+class TropicalTilesProvider {
+    +getTile(noise) : Tile
+    +getCities() : Cities
 }
 
 }
+
+package Entities {
 
 class Tile {
     - key : String
-    - position : array
+    - position : int[]
     + getKey()
     + getPosition()
 }
 
+class Cities {
+    - names: String[]
+    - position : int[]
+    + getNames()
+    + getPosition()
+}
+
+}
+
 main .right.> TilesService
-main ..> Tile
+main ..> Entities
 main ..> Utils
 main ..> Perlin
 
@@ -47,6 +76,10 @@ TilesService ..> Providers
 GlacialTilesProvider .up.|> TilesProvider
 DesertTilesProvider .up.|> TilesProvider
 TemperateTilesProvider .up.|> TilesProvider
+SavannahTilesProvider .up.|> TilesProvider
+TropicalTilesProvider .up.|> TilesProvider
+
+Providers ..> Entities
 
 
 @enduml
