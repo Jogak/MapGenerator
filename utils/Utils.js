@@ -203,6 +203,7 @@ function drawRiver(points, ctx){
   ctx.beginPath();
   ctx.lineWidth = '3' ;
   ctx.strokeStyle ="#18AEE4";
+  
   ctx.moveTo(f.hexToPixel(new Hex(points[0].x,points[0].y, 0- points[0].x - points[0].y)).x+16, f.hexToPixel(new Hex(points[0].x,points[0].y, (0 -points[0].x - points[0].y))).y+28);
   for(var i = 1; i < points.length; i++){
     ctx.lineTo(f.hexToPixel(new Hex(points[i].x,points[i].y, 0- points[i].x - points[i].y)).x+16, f.hexToPixel(new Hex(points[i].x,points[i].y, (0 -points[i].x - points[i].y))).y+28);
