@@ -1,11 +1,38 @@
 var img = document.createElement('IMG');
 img.src = "tiles.png";
 
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
 const tilesMap = new Map();
+
+function possibleTiles(current_x, current_y, delta_x,delta_y){
+  if ((current_x <= 335 && delta_x == 0) ){
+    return false;
+  } else if ((current_x >= 2000 && delta_x == 2)){
+
+    return false;
+  } else if ( (current_y <= 335 && delta_y == 0)){
+
+    return false;
+  } else if ( (current_y >=2000 && delta_y == 2)){
+    return false;
+  }
+
+  return true;
+}
+
+function isWaterTiles(x,y){
+  tiles = tilesDrawn.get(x+"_"+y);
+  console.log(tiles);
+  position = tiles.indexOf("water");
+  if (position >= 0){
+    return true;
+  }
+  return false;
+}
 
 /* BEGIN temperate tiles */
 tilesMap.set("temperate_soil_1", [0,0]);
@@ -129,6 +156,9 @@ size = 15,
 x = 100,
 y = 100;
 
+var logo = document.getElementById("tiles");
+let river_pattern = ctx.createPattern(logo, 'repeat');
+
 canvas.width = 1100;
 canvas.height = 1100;
 
@@ -155,6 +185,7 @@ const tilesDrawn = new Map();
 img.onload = function () {
     noise.seed(getRandomInt(65536)+1);
     for (let i = 0; i < grid_y; i++) {
+
         if (i % 2 != 0) {
             current_x += 1.5 * size;
         }
@@ -394,6 +425,122 @@ img.onload = function () {
         current_y += separation_y;
     }
 
+    //Drawing route
+    //var route_size = getRandomInt(10) +1;
+    var route_size = 20;
+    //var x_route = (getRandomInt(10)*size + (canvas.width/2.0 - grid_x_pixels/2.0)+1);
+    //var y_route = (getRandomInt(10)*size + (canvas.height/2.0 - grid_y_pixels/2.0)+1);
+    var x_pos = getRandomInt(10) +1;
+    var y_pos = getRandomInt(10) +1;
+    let brk =0;
+    while(!isWaterTiles(x_pos,y_pos) && brk <6){
+      x_pos = getRandomInt(10);
+      y_pos = getRandomInt(10);
+      brk +=1;
+    }
+    if(brk <6){
+     var x_route = canvas.width/2.0 - grid_x_pixels/2.0 + size + (x_pos*(size*3));
+     var y_route =  canvas.width/2.0 - grid_x_pixels/2.0 +size*2 +(y_pos*size);
+     console.log(x_route);
+     var delta_y;
+     var delta_x;
+
+      for (var i = 0; i < route_size; i++) {
+        ctx.beginPath();
+        ctx.lineWidth = '3' ;
+        ctx.strokeStyle ="#18AEE4";
+        ctx.strokeStyle = "black";
+      //ctx.rect(98, 250, 32, 48);
+//ctx.fillStyle = river_pattern;
+//ctx.fill();
+      ctx.moveTo(x_route,y_route);
+
+        delta_y = getRandomInt(3);
+        delta_x = getRandomInt(3);
+        delta = [delta_x,delta_y];
+        while(!possibleTiles(x_route,y_route,delta_x, delta_y)){
+          delta_x= getRandomInt(3);
+          delta_y=getRandomInt(3);
+
+        }
+        x_pos +=delta_x -1;
+        y_pos += delta_y -1;
+
+      if(!isWaterTiles(x_pos,y_pos)){
+        x_pos -=delta_x +1;
+        y_pos -= delta_y +1;
+      } else {
+      switch(delta_x){
+        case 0 :
+          switch(delta_y){
+            case 0 :
+            y_route -=size *0.86;
+            x_route -= size *3;
+            break;
+            case 1 :
+
+            break;
+            case 2 :
+            y_route +=size *0.86;
+            x_route -= size *1.5;
+            break;
+          }
+
+          break;
+        case 1 :
+          switch(delta_y){
+            case 0 :
+            y_route -=size*0.86;
+            break;
+            case 1 :
+
+            break;
+            case 2 :
+            y_route +=size*0.86;
+            break;
+          }
+          break;
+        case 2 :
+        switch(delta_y){
+          case 0 :
+          y_route -=size *0.86;
+          x_route += size*1.5;
+          break;
+          case 1 :
+
+          break;
+          case 2 :
+          y_route +=size *0.86;
+          x_route += size * 1.5;
+          break;
+        }
+
+        break;
+      }
+
+
+      ctx.lineTo(x_route,y_route);
+      ctx.stroke();
+    }
+
+    /*current_x = canvas.width/2.0 - grid_x_pixels/2.0 +(size);
+    current_y = canvas.height/2.0 - grid_y_pixels/2.0 + (size*2);
+    ctx.beginPath();
+    ctx.lineWidth = '3' ;
+    ctx.strokeLine = 'black';
+    ctx.moveTo(current_x,current_y);
+    current_x  += size *1.5;
+    current_y +=size*0.86;
+    ctx.lineTo(current_x,current_y);
+    ctx.moveTo(current_x,current_y);
+    ctx.lineTo(current_x+size*1.5,current_y+size);
+    current_x  += size *1.5;
+    current_y +=size*0.86;
+    ctx.moveTo(current_x,current_y);
+    ctx.lineTo(current_x+size*1.5,current_y+size);
+    */
+    }
+  }
     console.log(tilesDrawn);
 }
 /* END drawing canva */
