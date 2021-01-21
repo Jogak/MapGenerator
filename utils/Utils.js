@@ -1,4 +1,4 @@
-import {Hex, Layout, Point} from "../../youssef/lib-module.js";
+import {Hex, Layout, Point} from "./lib-module.js";
 
 
 export function getRandomInt(max) {

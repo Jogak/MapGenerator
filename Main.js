@@ -1,5 +1,5 @@
-import {createMatrix, getRandomInt, hexDistance, hexIsAccessible, indicesItemInArray, path} from "./utils/Utils.js";
-import {Layout, Point, Hex} from "../youssef/lib-module.js";
+import {createMatrix, getRandomInt, indicesItemInArray, path} from "./utils/Utils.js";
+import {Layout, Point, Hex} from "./utils/lib-module.js";
 import {getTile} from "./services/TilesService.js";
 
 const tilesDrawn = new Map();
@@ -11,10 +11,9 @@ let size = SIZE,
     side = 0,
     x = 100,
     y = 100;
+
 let scale = SCALE;
 let temperature_level = TEMPERATURE;
-
-let n;
 let tile;
 let key;
 
