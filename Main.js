@@ -1,4 +1,4 @@
-import {createMatrix, getRandomInt, indicesItemInArray, path} from "./utils/Utils.js";
+import {createMatrix, getRandomInt, indicesItemInArray, path,createRiver} from "./utils/Utils.js";
 import {Layout, Point, Hex} from "./utils/lib-module.js";
 import {getTile} from "./services/TilesService.js";
 
