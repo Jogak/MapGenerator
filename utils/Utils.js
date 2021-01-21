@@ -31,7 +31,7 @@ export function hexIsAccessible(a, x, y) {
     if(a[x] == undefined) return false;
     if(a[x][y] == undefined) return false;
     if(a[x][y] == "") return false;
-    if(a[x][y].includes("mountains") || a[x][y].includes("water")) return false;
+    if(a[x][y].includes("mountains") || a[x][y].includes("water") || a[x][y].includes("canyon") || a[x][y].includes("volcano")) return false;
 
     return true;
 }

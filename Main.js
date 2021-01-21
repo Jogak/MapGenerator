@@ -69,7 +69,7 @@ img.onload = function () {
         cities_to_draw_indices.push(index);
     }
     /* END get indices of possible cities to draw */
-    ctx
+    //ctx
 
     // process and draw path between positions
     path(map_matrix, cities_to_draw_indices[0][0], cities_to_draw_indices[0][1], cities_to_draw_indices[1][0], cities_to_draw_indices[1][1], 20, 20,ctx);
@@ -77,7 +77,24 @@ img.onload = function () {
     // process of creation of river
     createRiver(map_matrix,ctx);
     /* BEGIN draw cities and write unique names */
-    let north_cities = ["Stockholm", "Oslo", "Malmö", "Copenhague", "Helsinki"];
+    let cities;
+    let city_coord;
+    if (TEMPERATURE == -1) {
+        cities = ["Stockholm", "Oslo", "Malmö", "Copenhague", "Helsinki"];
+        city_coord = [4, 7];
+    } else if (TEMPERATURE == 0) {
+        cities = ["Paris", "Berlin", "Amsterdam", "Zurich", "Vienne"];
+        city_coord = [1, 7];
+    } else if (TEMPERATURE == 1) {
+        cities = ["Sao Paulo", "Buenos Aires", "Cordoba", "La Paz", "Lima"];
+        city_coord = [7, 7];
+    } else if (TEMPERATURE == 2) {
+        cities = ["Bamako", "Dakar", "Kinshasa", "Nairobi", "Abidjan"];
+        city_coord = [6, 7];
+    } else if (TEMPERATURE == 3) {
+        cities = ["Rabat", "Le Caire", "Tunis", "Alger", "Tripoli"];
+        city_coord = [8, 7];
+    }
     let picked_cities = [];
     let picked_city;
     let difference;
@@ -85,9 +102,9 @@ img.onload = function () {
         let h;
         h = new Hex(cities_to_draw_indices[i][0], cities_to_draw_indices[i][1], -cities_to_draw_indices[i][0]-cities_to_draw_indices[i][1]);
         ctx.moveTo(flat.hexToPixel(h).x, flat.hexToPixel(h).y);
-        ctx.drawImage(img, 4*32, 7*48, 32, 48, flat.hexToPixel(h).x, flat.hexToPixel(h).y, 32, 48);
+        ctx.drawImage(img, city_coord[0]*32, city_coord[1]*48, 32, 48, flat.hexToPixel(h).x, flat.hexToPixel(h).y, 32, 48);
 
-        difference = north_cities.filter(x => !picked_cities.includes(x));
+        difference = cities.filter(x => !picked_cities.includes(x));
         picked_city = difference[getRandomInt(difference.length)];
         picked_cities.push(picked_city);
         ctx.font = "10px Arial";
