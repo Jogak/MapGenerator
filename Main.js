@@ -71,11 +71,12 @@ img.onload = function () {
     /* END get indices of possible cities to draw */
     //ctx
 
+    // process of creation of river
+    createRiver(map_matrix,ctx);
     // process and draw path between positions
     path(map_matrix, cities_to_draw_indices[0][0], cities_to_draw_indices[0][1], cities_to_draw_indices[1][0], cities_to_draw_indices[1][1], 20, 20,ctx);
 
-    // process of creation of river
-    createRiver(map_matrix,ctx);
+    
     /* BEGIN draw cities and write unique names */
     let cities;
     let city_coord;
