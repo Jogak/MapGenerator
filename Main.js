@@ -80,7 +80,7 @@ function createRiver(ctx) {
     let nextPoint;
     let cptPath = 0;
 
-    while (cptPath < 5) {
+    while (cptPath < 7) {
         if (possible_points.length !== 0) {
             nextPoint = possible_points[getRandomInt(possible_points.length - 1)];
             riverPoint[cptPath + 1] = nextPoint;
